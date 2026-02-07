@@ -439,7 +439,7 @@ select:focus {
 }
 
 .hero-subtitle {
-  font-size: clamp(24px, 3.2vw, 38px);
+  font-size: clamp(20px, 3.2vw, 20px);
   margin: 0;
   color: var(--safe);
 }
@@ -515,6 +515,7 @@ select:focus {
   padding: 10px 16px;
   border-radius: 999px;
   background: #e7e2dc;
+  opacity: 1;
   color: var(--safe);
   font-weight: 600;
   border: 1px solid rgba(80, 84, 94, 0.14);

@@ -28,25 +28,6 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div
             className="absolute inset-0"
-            // style={{
-            //   backgroundImage: `
-            //     repeating-linear-gradient(
-            //       45deg,
-            //       var(--primary) 0px,
-            //       var(--primary) 1px,
-            //       transparent 1px,
-            //       transparent 60px
-            //     ),
-            //     repeating-linear-gradient(
-            //       -45deg,
-            //       var(--primary) 0px,
-            //       var(--primary) 1px,
-            //       transparent 1px,
-            //       transparent 60px
-            //     )
-            //   `,
-            //   animation: 'patternShift 30s linear infinite'
-            // }}
           />
         </div>
 
@@ -79,7 +60,7 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
                   <div
                     className="absolute inset-0 transition-all duration-700 blur-3xl opacity-0"
                     style={{
-                      background: `radial-gradient(circle at ${isEven ? '30%' : '70%'} 50%, rgba(198,165,154,0.35), transparent 60%)`,
+                      background: `radial-gradient(circle at ${isEven ? '30%' : '70%'} 50%, #c6a59a55, transparent 60%)`,
                       opacity: isHovered ? 1 : 0,
                       transform: isHovered ? 'scale(1.1)' : 'scale(0.9)'
                     }}
@@ -147,7 +128,10 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
                           transform: isHovered ? 'scale(1.05)' : 'scale(1)'
                         }}
                       >
-                        <span className="w-2 h-2 rounded-full bg-current animate-pulse" />
+                        <span
+                          className="w-2 h-2 rounded-full animate-pulse"
+                          style={{ backgroundColor: 'var(--natural)' }}
+                        />
                         Featured Project
                       </div>
 
@@ -156,7 +140,7 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
                         className="text-3xl md:text-4xl font-bold mb-5 transition-all duration-300"
                         style={{
                           color: 'var(--primary)',
-                          textShadow: isHovered ? '0 0 20px rgba(100, 255, 218, 0.3)' : 'none',
+                          textShadow: isHovered ? '0 0 20px #c6a59a' : 'none',
                           transform: isHovered ? 'translateX(0)' : `translateX(${isEven ? '4px' : '-4px'})`
                         }}
                       >
@@ -167,9 +151,9 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
                       <div
                         className="relative p-6 rounded-xl mb-5 transition-all duration-500 backdrop-blur-md w-full md:w-auto"
                         style={{
-                          border: '1px solid rgba(100, 255, 218, 0.2)',
+                          border: '1px solid #c6a59a',
                           boxShadow: isHovered 
-                            ? '0 20px 40px -10px rgba(100, 255, 218, 0.2)'
+                            ? '0 20px 40px -10px #c6a59a'
                             : '0 10px 20px -5px rgba(0, 0, 0, 0.3)',
                           transform: isHovered ? 'translateY(-4px)' : 'translateY(0)'
                         }}
@@ -195,7 +179,6 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
                             className="px-3 py-1 rounded-md transition-all duration-300"
                             style={{
                               color: isHovered ? 'var(--primary)' : 'var(--muted)',
-                              // backgroundColor: isHovered ? 'var(--primary)10' : 'transparent',
                               border: `1px solid ${isHovered ? 'var(--primary)50' : 'transparent'}`,
                               transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
                               animationDelay: `${techIndex * 0.05}s`

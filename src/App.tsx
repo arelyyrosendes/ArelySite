@@ -88,7 +88,7 @@ const Portfolio: React.FC = () => {
     };
   }, []);
 
-  const scrollToSection = (elementRef: React.RefObject<HTMLElement | null>, offset: number = 92) => {
+  const scrollToSection = (elementRef: React.RefObject<HTMLElement | null>, offset: number = 60) => {
     const element = elementRef.current;
     if (!element) return;
     const top = element.getBoundingClientRect().top + window.scrollY;
@@ -289,8 +289,7 @@ const Portfolio: React.FC = () => {
         <div className="container max-w-6xl mx-auto px-6 py-3">
           <div className="flex justify-between items-center">
             <div
-              className="flex items-center gap-1 px-3 py-2 rounded-lg"
-              style={{ backgroundColor: '#c6a59a', borderRadius: '50px' }} 
+              className="flex items-center gap-1 px-1 py-1 rounded-lg"
             >
               <button
                 className="flex items-center gap-3 cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
@@ -298,7 +297,7 @@ const Portfolio: React.FC = () => {
                 aria-label="Go to top"
                 style={{ color: 'var(--primary-contrast)' }}
               >
-                <img src="/images/Logo.png" alt="Logo" className="h-10 w-10" />
+                <img src="/images/Logo.png" alt="Logo" className="h-12 w-12" />
               </button>
             </div>
 
@@ -408,17 +407,19 @@ const Portfolio: React.FC = () => {
         <section
           ref={heroRef}
           id="hero"
-          className="section hero min-h-[calc(100vh-96px)] flex items-center px-6"
+          className="section hero max-h-[calc(95vh-96px)] flex items-center px-6"
         >
           <div className="container max-w-6xl mx-auto w-full">
             <div className={`hero-card-modern ${isLoaded ? 'hero-card-ready' : ''}`}>
               <div className="hero-copy">
                 <p className="hero-kicker">Computer Science • Frontend & Full-Stack</p>
                 <h1 ref={nameRef} className="hero-title typing">Arely Rosendes</h1>
-                <h2 className="hero-subtitle">I build websites!</h2>
+                <h2 className="hero-subtitle">Turning ideas into intuitive web experiences</h2>
                 <p className="hero-body">
-                  I’m a computer science student focused on building clean, accessible interfaces with strong engineering foundations.
-                  Currently earning my degree at UC Santa Cruz.
+                  Fourth-year Computer Science student at{' '}
+                  <span style={{ color: 'var(--natural)', fontWeight: 600 }}>UC Santa Cruz</span>{' '}
+                  who loves building websites, full-stack applications, and projects that feel both
+                  easy and enjoyable to use.
                 </p>
                 <div className="hero-actions">
                   <div className="hero-socials">

@@ -14,7 +14,7 @@ const AboutMe = forwardRef<HTMLElement>((_, ref) => (
         <div className="flex-1 h-px bg-gray-600"></div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-10 items-start">
+      <div className="grid md:grid-cols-3 gap-10 items-start max-h-[390px]">
         <div className="md:col-span-2">
           <div className="space-y-4 text-lg" style={{ color: 'var(--text)' }}>
             <p
