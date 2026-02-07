@@ -76,7 +76,23 @@ body {
       rgba(198, 165, 154, 0.28),
       transparent 55%
     ),
+    repeating-linear-gradient(
+      45deg,
+      var(--primary) 0px,
+      var(--primary) 1px,
+      transparent 1px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      var(--primary) 0px,
+      var(--primary) 1px,
+      transparent 1px,
+      transparent 60px
+    ),
     var(--bg);
+  background-size: auto, auto, 120px 120px, 120px 120px, auto;
+  animation: patternShift 30s linear infinite;
 }
 
 img {
@@ -550,6 +566,49 @@ select:focus {
 @keyframes hero-typing {
   from { width: 0; }
   to { width: var(--typing-target-final, 100%); }
+}
+
+@keyframes patternShift {
+  from {
+    background-position:
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+  to {
+    background-position:
+      0 0,
+      0 0,
+      120px 120px,
+      -120px -120px,
+      0 0;
+  }
+}
+
+/* Nav hover underline */
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 0;
+  background: var(--highlight);
+  border-radius: 999px;
+  transition: width var(--dur) var(--ease);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  width: 100%;
 }
 
 .hero-location-below {

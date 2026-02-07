@@ -99,16 +99,6 @@ const Portfolio: React.FC = () => {
   // projects - use public/ paths by referencing root ("/ChariWork.png")
   const projects = [
     {
-      title: "ChariWork",
-      description:
-        "A website that rounds up your changes from everyday purchases and donates it to charity. Built with React, Node.js, and Neon Database, featuring secure payment integration and real-time donation tracking.",
-      tech: ["React", "Node.js", "Neon", "Plaid API", "Charities API"],
-      github: "https://github.com",
-      demo: null,
-      featured: true,
-      image: "/ChariWork.png"
-    },
-    {
       title: "UCSC Baskin Booking Website",
       description:
         "Tour booking website for UCSC's Baskin Engineering Student Ambassador program. Built with React and Firebase, featuring real-time scheduling, admin dashboard, and secure authentication.",
@@ -116,7 +106,17 @@ const Portfolio: React.FC = () => {
       github: "https://github.com/natanielj/BESABooking",
       demo: "https://besabooking.vercel.app",
       featured: true,
-      image: "/BESA_Booking.png"
+      image: "/images/BESA_Booking.png"
+    },
+    {
+      title: "ChariWork",
+      description:
+        "A website that rounds up your changes from everyday purchases and donates it to charity. Built with React, Node.js, and Neon Database, featuring secure payment integration and real-time donation tracking.",
+      tech: ["React", "Node.js", "Neon", "Plaid API", "Charities API"],
+      github: "https://github.com/PouriaRez/ChariWork",
+      demo: "https://chari-work-115.vercel.app/",
+      featured: true,
+      image: "/images/ChariWork.png"
     },
     {
       title: "Portfolio for UCLA EE Engineer",
@@ -126,7 +126,7 @@ const Portfolio: React.FC = () => {
       github: "https://github.com/agonzalez85/andys-Website",
       demo: "https://andygonzalez.me/",
       featured: true,
-      image: "/andy_website.png"
+      image: "/images/andy_website.png"
     },
     {
       title: "Meal Planner App",
@@ -288,16 +288,22 @@ const Portfolio: React.FC = () => {
       >
         <div className="container max-w-6xl mx-auto px-6 py-3">
           <div className="flex justify-between items-center">
-            <button
-              className="flex items-center gap-3 cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
-              onClick={() => scrollToSection(heroRef, 0)}
-              aria-label="Go to top"
+            <div
+              className="flex items-center gap-1 px-3 py-2 rounded-lg"
+              style={{ backgroundColor: '#c6a59a', borderRadius: '50px' }} 
             >
-              <img src="/images/Logo.png" alt="Logo" className="h-12 w-auto" />
-              <span className="hidden sm:block font-semibold tracking-tight" style={{ color: 'var(--safe)' }}>
-                Arely Rosendes
-              </span>
-            </button>
+              <button
+                className="flex items-center gap-3 cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+                onClick={() => scrollToSection(heroRef, 0)}
+                aria-label="Go to top"
+                style={{ color: 'var(--primary-contrast)' }}
+              >
+                <img src="/images/Logo.png" alt="Logo" className="h-10 w-10" />
+                <span className="hidden sm:block font-semibold tracking-tight">
+                  Arely Rosendes
+                </span>
+              </button>
+            </div>
 
             {/* Desktop Menu */}
             <div className="flex items-center gap-8">
@@ -305,7 +311,7 @@ const Portfolio: React.FC = () => {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.ref)}
-                  className="text-sm font-mono transition-colors duration-200 hover:opacity-90"
+                  className="nav-link text-sm font-mono transition-colors duration-200 hover:opacity-90"
                   style={{
                     color: activeSection === item.id ? 'var(--safe)' : 'var(--muted)'
                   }}
@@ -341,7 +347,7 @@ const Portfolio: React.FC = () => {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.ref)}
-                    className="text-left py-3 font-mono text-sm"
+                    className="nav-link text-left py-3 font-mono text-sm"
                     style={{ color: 'var(--safe)' }}
                   >
                     {item.label}
@@ -367,11 +373,13 @@ const Portfolio: React.FC = () => {
           {[
             { icon: <Github size={20} />, href: "https://github.com/arelyyrosendes" },
             { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arelyrosendes/" },
-            { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com" }
+            { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com?subject=Hello%20Arely" }
           ].map((social, index) => (
             <a
               key={index}
               href={social.href}
+              target={social.href.startsWith('http') ? "_blank" : undefined}
+              rel={social.href.startsWith('http') ? "noopener noreferrer" : undefined}
               className="transition-all duration-300 hover:-translate-y-1"
               style={{ color: 'var(--muted)' }}
               aria-label="social link"
@@ -424,12 +432,14 @@ const Portfolio: React.FC = () => {
                       <Linkedin size={26} />
                     </a>
                   </div>
-                  <button
+                  <a
                     className="btn resume-btn"
-                    onClick={() => scrollToSection(resumeRef)}
+                    href="/Resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
                     Resume <ArrowRight size={18} />
-                  </button>
+                  </a>
                 </div>
               </div>
 
@@ -478,11 +488,13 @@ const Portfolio: React.FC = () => {
               {[
                 { icon: <Github size={20} />, href: "https://github.com/arelyyrosendes" },
                 { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arelyrosendes/" },
-                { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com" }
+                { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com?subject=Hello%20Arely" }
               ].map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
+                  target={social.href.startsWith('http') ? "_blank" : undefined}
+                  rel={social.href.startsWith('http') ? "noopener noreferrer" : undefined}
                   className="transition-all duration-300 hover:-translate-y-1"
                   style={{ color: 'var(--muted)' }}
                   aria-label="social link"
