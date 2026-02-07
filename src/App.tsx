@@ -141,72 +141,71 @@ const Portfolio: React.FC = () => {
   ];
 
   const experiences = [
-    {
-      title: "Web Developer Intern",
-      company: "Baskin Engineering, UC Santa Cruz",
-      location: "Santa Cruz, CA",
-      period: "Summer 2025",
-      description: [
-        "Developed a React-based tour booking website for UCSC's BESA program, enabling prospective students to schedule engineering building tours",
-        "Built a user-friendly admin dashboard for managing tours, BESAs, and office hours",
-        "Integrated Firebase Authentication for secure admin access and Firestore for real-time database updates",
-        "Collaborated with teammates to design front-end components and ensure responsive, mobile-friendly layouts"
-      ],
-      technologies: ["React", "TypeScript", "Firebase", "Tailwind CSS", "React Router"]
-    },
-    {
-      title: "DevOps Intern",
-      company: "Lawrence Livermore National Laboratory",
-      location: "Livermore, CA",
-      period: "Summer 2024",
-      description: [
-        "Hosted and deployed an AI interface locally using Docker and Kubernetes, eliminating third-party dependencies",
-        "Managed containerized applications and orchestrated services in a Linux environment",
-        "Implemented CI/CD pipelines and automated deployments for internal applications",
-        "Documented processes and collaborated with senior engineers on AI integration and system reliability"
-      ],
-      technologies: ["Docker", "Kubernetes", "Linux", "OpenShift", "CI/CD"]
-    },
-    {
-      title: "Front-End Supervisor",
-      company: "Burlington Stores",
-      location: "Santa Cruz, CA",
-      period: "2022 - 2023",
-      description: [
-        "Supervised and trained a team of cashiers and floor associates to improve workflow and customer service",
-        "Managed front-end operations, ensuring accuracy in transactions and store presentation",
-        "Implemented process improvements to optimize checkout efficiency",
-        "Assisted in onboarding and mentoring new employees"
-      ],
-      technologies: ["POS Systems", "Team Leadership", "Customer Service"]
-    },
-    {
-      title: "Guest Advocate",
-      company: "Target",
-      location: "Santa Cruz, CA",
-      period: "2021 - 2022",
-      description: [
-        "Provided exceptional customer service, resolving inquiries and complaints promptly",
-        "Guided guests through store policies and promotions to enhance their shopping experience",
-        "Collaborated with team members to maintain a clean and organized store environment",
-        "Supported onboarding and training of new team members"
-      ],
-      technologies: ["Customer Service", "Problem Solving", "Team Collaboration"]
-    },
-    {
-      title: "Cashier",
-      company: "Ross Dress for Less",
-      location: "Santa Cruz, CA",
-      period: "2020 - 2021",
-      description: [
-        "Processed transactions efficiently while maintaining accuracy and speed",
-        "Assisted customers with product inquiries and returns, ensuring a positive shopping experience",
-        "Maintained store appearance and organized merchandise",
-        "Worked collaboratively with team members to achieve daily operational goals"
-      ],
-      technologies: ["POS Systems", "Customer Service", "Teamwork"]
-    }
-  ];
+  {
+    title: "Software Developer",
+    company: "Baskin Engineering, UC Santa Cruz",
+    location: "Santa Cruz, CA",
+    period: "June 2025 – Present",
+    description: [
+      "Designed and developed a React-based tour booking platform used by prospective students to schedule engineering building tours",
+      "Built and maintained an admin dashboard for managing tours, student ambassadors, availability, and office hours",
+      "Implemented secure authentication with Firebase Auth and real-time data management using Firestore",
+      "Collaborated cross-functionally to deliver responsive, mobile-first UI components with consistent design patterns"
+    ],
+    technologies: ["React", "TypeScript", "Firebase", "Tailwind CSS", "React Router"]
+  },
+  {
+    title: "DevOps Intern",
+    company: "Lawrence Livermore National Laboratory",
+    location: "Livermore, CA",
+    period: "Summer 2024",
+    description: [
+      "Deployed a locally hosted AI web interface using Docker and Kubernetes, removing reliance on external services",
+      "Managed containerized applications and service orchestration in a Linux-based environment",
+      "Implemented CI/CD pipelines to automate builds and deployments for internal tools",
+      "Partnered with senior engineers to improve system reliability, documentation, and deployment workflows"
+    ],
+    technologies: ["Docker", "Kubernetes", "Linux", "OpenShift", "CI/CD"]
+  },
+  {
+    title: "Front-End Supervisor",
+    company: "Burlington Stores",
+    location: "Union City, CA",
+    period: "2022 – 2023",
+    description: [
+      "Led and trained a front-end team to improve checkout efficiency and customer experience",
+      "Oversaw daily front-end operations, ensuring transaction accuracy and operational consistency",
+      "Introduced workflow improvements that reduced checkout delays and improved team coordination",
+      "Mentored new hires through onboarding and ongoing training"
+    ],
+    technologies: ["POS Systems", "Team Leadership", "Customer Service"]
+  },
+  {
+    title: "Guest Advocate",
+    company: "Target",
+    location: "Hayward, CA",
+    period: "2021 – 2022",
+    description: [
+      "Delivered high-quality customer service by resolving issues and guiding guests through store processes",
+      "Collaborated with team members to maintain store organization and operational standards",
+      "Supported training and onboarding of new employees in a fast-paced environment"
+    ],
+    technologies: ["Customer Service", "Problem Solving", "Team Collaboration"]
+  },
+  {
+    title: "Cashier",
+    company: "Ross Dress for Less",
+    location: "Union City, CA",
+    period: "2020 – 2021",
+    description: [
+      "Handled high-volume transactions with speed and accuracy",
+      "Assisted customers with inquiries, returns, and in-store support",
+      "Worked closely with team members to meet daily operational goals"
+    ],
+    technologies: ["POS Systems", "Customer Service", "Teamwork"]
+  }
+];
+
 
   const navItems = [
     { label: 'About', ref: aboutRef, id: 'about', subpages: [] },
