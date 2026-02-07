@@ -4,31 +4,39 @@ const AboutMe = forwardRef<HTMLElement>((_, ref) => (
   <section
     ref={ref}
     id="about"
-    className="section py-20 px-6"
+    className="pt-10 pb-6 px-6"
   >
     <div className="container max-w-6xl mx-auto">
-      <div className="flex items-center mb-16">
+      <div className="flex items-center mb-10">
         <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
           01. About Me
         </h2>
         <div className="flex-1 h-px bg-gray-600"></div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-12">
+      <div className="grid md:grid-cols-3 gap-10 items-start">
         <div className="md:col-span-2">
           <div className="space-y-4 text-lg" style={{ color: 'var(--text)' }}>
             <p
-              className="max-w-xl text-lg leading-relaxed mb-12"
+              className="max-w-2xl text-lg leading-relaxed mb-6"
               style={{ color: 'var(--text)' }}
             >
-              Hello! I'm a computer science student passionate about building meaningful, user-focused digital experiences.
-              I love blending clean functionality with thoughtful design to create interfaces that feel effortless to use.
-              Currently, I'm completing my degree at{' '}
-              <span style={{ color: 'var(--accent)' }}>UC Santa Cruz</span>, with a focus on front-end engineering, UI/UX, and full-stack development.
-              <br /><br />
-              When I'm not coding, you'll likely find me exploring the outdoors, designing creative side projects, or experimenting in the kitchen — cooking is my favorite creative outlet outside of tech. I love discovering new recipes, plating meals like tiny art pieces, and sharing food with friends.
-              <br /><br />
-              I'm driven by curiosity, collaboration, and the joy of bringing ideas to life, one well-built component (and one good recipe) at a time.
+              Hello! I’m a Computer Science student passionate about building intuitive,
+              user-focused digital experiences. I enjoy combining clean functionality with
+              thoughtful design to create interfaces that feel seamless and accessible.
+              I’m currently completing my degree at{' '}
+              <span style={{ color: 'var(--accent)' }}>UC Santa Cruz</span>, with a focus on
+              front-end engineering, UI/UX, and full-stack development.
+              <br />
+              <br />
+              Outside of coding, I love spending time at the beach, working on creative side
+              projects, and experimenting in the kitchen—cooking is my favorite creative
+              outlet beyond tech. I enjoy exploring new ideas, refining details, and sharing
+              what I build with others.
+              <br />
+              <br />
+              I’m driven by curiosity, collaboration, and turning ideas into polished,
+              impactful products.
             </p>
           </div>
         </div>
