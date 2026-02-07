@@ -525,7 +525,10 @@ select:focus {
   position: relative;
   display: grid;
   place-items: center;
-  min-height: 260px;
+  min-height: 240px;
+  width: 100%;
+  max-width: 480px;
+  justify-self: center;
 }
 
 .hero-visual-backdrop {
@@ -542,7 +545,7 @@ select:focus {
 
 .hero-visual-card {
   position: relative;
-  width: min(100%, 360px);
+  width: clamp(230px, 70vw, 420px);
   aspect-ratio: 4 / 3;
   border-radius: 18px;
   overflow: hidden;
@@ -612,6 +615,7 @@ select:focus {
 }
 
 .hero-location-below {
-  margin-top: 18px;
+  margin-top: 14px;
   justify-self: center;
+  text-align: center;
 }

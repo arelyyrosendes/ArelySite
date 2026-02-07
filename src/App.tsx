@@ -402,7 +402,7 @@ const Portfolio: React.FC = () => {
         </div>
       </div>
 
-      {/* Main content wrapper: offset for fixed nav */}
+      {/* Main content wrapper*/}
       <main className="pt-24">
         {/* Hero Section */}
         <section
@@ -441,7 +441,6 @@ const Portfolio: React.FC = () => {
               </div>
 
               <div className="hero-visual">
-                <div className="hero-visual-backdrop" />
                 <div className="hero-visual-card">
                   <img
                     src="/images/arelyrosendes.jpg"
