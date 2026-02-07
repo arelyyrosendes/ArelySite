@@ -299,9 +299,6 @@ const Portfolio: React.FC = () => {
                 style={{ color: 'var(--primary-contrast)' }}
               >
                 <img src="/images/Logo.png" alt="Logo" className="h-10 w-10" />
-                <span className="hidden sm:block font-semibold tracking-tight">
-                  Arely Rosendes
-                </span>
               </button>
             </div>
 
