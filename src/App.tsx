@@ -1,11 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, ExternalLink, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Mail, Menu, X, ArrowRight, MapPin } from 'lucide-react';
+import AboutMe from './sections/AboutMe';
+import Experience from './sections/Experience';
+import Projects from './sections/Projects';
+import Resume from './sections/Resume';
+import TechnicalSkills from './sections/TechnicalSkills';
 
 const Portfolio: React.FC = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const heroRef = useRef<HTMLElement>(null);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
@@ -21,33 +28,32 @@ const Portfolio: React.FC = () => {
       const el = nameRef.current;
       if (!el) return;
       const textLength = el.textContent?.length ?? 0;
-      // measure intrinsic text width
       const naturalWidth = el.scrollWidth;
-      // limit to available width in container
       const parentWidth = el.parentElement?.clientWidth ?? naturalWidth;
-      const maxWidth = Math.max(0, parentWidth - 4); // leave a tiny inset
+      const maxWidth = Math.max(0, parentWidth - 4);
       const targetWidth = Math.min(naturalWidth, maxWidth);
-      const buffer = 4; // breathing room for caret
+      const buffer = 4;
       const finalWidth = Math.min(targetWidth + buffer, parentWidth);
       el.style.setProperty('--typing-target', `${targetWidth}px`);
       el.style.setProperty('--typing-target-final', `${finalWidth}px`);
       el.style.setProperty('--typing-steps', `${Math.max(textLength, 1)}`);
     };
 
-    // initial measure after render and after fonts load
     const measureSoon = () => requestAnimationFrame(updateTypingWidth);
     measureSoon();
     if ((document as any).fonts?.ready) {
       (document as any).fonts.ready.then(measureSoon);
     }
-    // update on resize for responsiveness
+
     const handleResize = () => measureSoon();
     window.addEventListener('resize', handleResize);
-    // observe element size changes (e.g., breakpoint font-size shifts)
+
     const ro = new ResizeObserver(() => measureSoon());
     if (nameRef.current) ro.observe(nameRef.current);
 
     const handleScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+
       const sections = [
         { id: 'hero', ref: heroRef },
         { id: 'about', ref: aboutRef },
@@ -57,14 +63,13 @@ const Portfolio: React.FC = () => {
         { id: 'resume', ref: resumeRef }
       ];
 
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 120;
 
       for (const section of sections) {
         const element = section.ref.current;
         if (element) {
           const offsetTop = element.offsetTop;
           const offsetHeight = element.offsetHeight;
-
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(section.id);
             break;
@@ -74,6 +79,8 @@ const Portfolio: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
@@ -81,7 +88,7 @@ const Portfolio: React.FC = () => {
     };
   }, []);
 
-  const scrollToSection = (elementRef: React.RefObject<HTMLElement | null>, offset: number = 90) => {
+  const scrollToSection = (elementRef: React.RefObject<HTMLElement | null>, offset: number = 92) => {
     const element = elementRef.current;
     if (!element) return;
     const top = element.getBoundingClientRect().top + window.scrollY;
@@ -99,7 +106,6 @@ const Portfolio: React.FC = () => {
       github: "https://github.com",
       demo: null,
       featured: true,
-      // public/ChariWork.png -> reference as /ChariWork.png
       image: "/ChariWork.png"
     },
     {
@@ -130,7 +136,6 @@ const Portfolio: React.FC = () => {
       github: "https://github.com/arelyyrosendes/meal-planner-app",
       demo: null,
       featured: false,
-      // keep emoji fallback for when no image exists
       image: "🌱"
     }
   ];
@@ -204,10 +209,10 @@ const Portfolio: React.FC = () => {
   ];
 
   const navItems = [
-    { label: '01. About', ref: aboutRef, id: 'about', subpages: [] },
-    { label: '02. Technical Skills', ref: skillsRef, id: 'skills', subpages: [] },
+    { label: 'About', ref: aboutRef, id: 'about', subpages: [] },
+    { label: 'Skills', ref: skillsRef, id: 'skills', subpages: [] },
     {
-      label: '03. Experience',
+      label: 'Experience',
       ref: experienceRef,
       id: 'experience',
       subpages: experiences.map(exp => ({
@@ -217,26 +222,16 @@ const Portfolio: React.FC = () => {
           setTimeout(() => {
             const index = experiences.findIndex(e => e.company === exp.company);
             setSelectedIndex(index);
-          }, 500);
+          }, 450);
         }
       }))
     },
-    {
-      label: '04. Projects',
-      ref: projectsRef,
-      id: 'projects',
-      subpages: [
-        { label: 'Featured Projects', action: () => scrollToSection(projectsRef) },
-        { label: 'Other Projects', action: () => scrollToSection(projectsRef) }
-      ]
-    },
-    { label: '05. Resume', ref: resumeRef, id: 'resume', subpages: [] }
+    { label: 'Projects', ref: projectsRef, id: 'projects', subpages: [] },
+    { label: 'Resume', ref: resumeRef, id: 'resume', subpages: [] }
   ];
 
-  // helper to render project image (handles public root paths or emoji fallback)
-  const renderProjectImage = (image: string | undefined, title: string) => {
+  const renderProjectImage = (image: string | undefined, title: string): JSX.Element | null => {
     if (!image) return null;
-    // If it's likely a path (starts with '/'), render <img>
     if (typeof image === 'string' && image.startsWith('/')) {
       return (
         <img
@@ -247,8 +242,10 @@ const Portfolio: React.FC = () => {
         />
       );
     }
-    // if it's a plain filename without leading '/', allow that too
-    if (typeof image === 'string' && (image.endsWith('.png') || image.endsWith('.jpg') || image.endsWith('.jpeg') || image.endsWith('.webp'))) {
+    if (
+      typeof image === 'string' &&
+      (image.endsWith('.png') || image.endsWith('.jpg') || image.endsWith('.jpeg') || image.endsWith('.webp'))
+    ) {
       const path = image.startsWith('/') ? image : `/${image}`;
       return (
         <img
@@ -259,458 +256,224 @@ const Portfolio: React.FC = () => {
         />
       );
     }
-    // fallback: emoji or text
     return <div className="text-8xl">{image}</div>;
   };
 
   return (
     <div
-      className="min-h-screen transition-all duration-1000"
+      className="min-h-screen"
       style={{
         backgroundColor: 'var(--bg)',
         color: 'var(--text)'
       }}
     >
+      {/* Subtle background wash */}
+      <div
+        aria-hidden="true"
+        className="fixed inset-0 -z-10"
+        style={{
+          background:
+            'radial-gradient(900px 500px at 15% 10%, rgba(198,165,154,0.22), transparent 60%), radial-gradient(900px 500px at 85% 20%, rgba(133,155,120,0.20), transparent 60%)'
+        }}
+      />
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-40 transition-all duration-300 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+      <nav
+        className="fixed top-0 w-full z-40 transition-all duration-300"
+        style={{
+          backgroundColor: 'rgba(246,240,233,0.92)',
+          borderBottom: '1px solid var(--border)',
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0 6px 16px rgba(80, 84, 94, 0.12)'
+        }}
+      >
+        <div className="container max-w-6xl mx-auto px-6 py-3">
           <div className="flex justify-between items-center">
-            <div
-              className="cursor-pointer transition-transform duration-300"
-              onClick={() => scrollToSection(heroRef)}
+            <button
+              className="flex items-center gap-3 cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+              onClick={() => scrollToSection(heroRef, 0)}
+              aria-label="Go to top"
             >
-              {/* logo in public -> use root path */}
-              <img src="/Logo.png" alt="Logo" className="h-20 w-auto" />
-            </div>
+              <img src="/images/Logo.png" alt="Logo" className="h-12 w-auto" />
+              <span className="hidden sm:block font-semibold tracking-tight" style={{ color: 'var(--safe)' }}>
+                Arely Rosendes
+              </span>
+            </button>
 
             {/* Desktop Menu */}
-            <div className={`${isMenuOpen ? "hidden" : " md:flex"} items-center space-x-8`}>
+            <div className="flex items-center gap-8">
               {navItems.map((item) => (
-                <div key={item.id} className="relative group">
-                  <button
-                    onClick={() => scrollToSection(item.ref, 50)}
-                    className="text-sm font-mono transition-colors duration-200 hover:text-pink-300 relative"
-                    style={{
-                      color: activeSection === item.id ? 'var(--highlight)' : 'var(--muted)'
-                    }}
-                  >
-                    {item.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-300 transition-all duration-300 group-hover:w-full" style={{ backgroundColor: 'var(--highlight)' }}></span>
-                  </button>
-                </div>
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.ref)}
+                  className="text-sm font-mono transition-colors duration-200 hover:opacity-90"
+                  style={{
+                    color: activeSection === item.id ? 'var(--safe)' : 'var(--muted)'
+                  }}
+                >
+                  {item.label}
+                </button>
               ))}
             </div>
 
-            {/* Mobile Menu Button (visible on small screens only) */}
+            {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2"
+              className="md:hidden p-2 rounded-md"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-expanded={isMenuOpen}
               aria-label="Toggle menu"
-              style={{ color: 'var(--primary)' }}
+              style={{ color: 'var(--safe)', border: '1px solid var(--border)', backgroundColor: 'rgba(253,248,243,0.6)' }}
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
 
           {/* Mobile Menu */}
           {isMenuOpen && (
-            <div className="md:hidden mt-4 p-6 rounded-lg backdrop-blur-lg" style={{ backgroundColor: 'rgba(80, 84, 94, 0.9)' }}>
-              {navItems.map((item) => (
+            <div
+              className="md:hidden mt-3 p-4 rounded-xl"
+              style={{
+                backgroundColor: 'rgba(253,248,243,0.92)',
+                border: '1px solid var(--border)'
+              }}
+            >
+              <div className="flex flex-col">
+                {navItems.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.ref)}
+                    className="text-left py-3 font-mono text-sm"
+                    style={{ color: 'var(--safe)' }}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+
                 <button
-                  key={item.label}
-                  onClick={() => scrollToSection(item.ref)}
-                  className="block w-full text-left py-3 font-mono transition-colors duration-200"
-                  style={{ color: 'var(--primary-contrast)' }}
+                  onClick={() => window.open('/resume.pdf', '_blank')}
+                  className="mt-2 px-4 py-2 rounded-md font-mono text-sm border"
+                  style={{ borderColor: 'var(--border)', color: 'var(--safe)' }}
                 >
-                  {item.label}
+                  Open Resume PDF
                 </button>
-              ))}
-              <a
-                href="/resume.pdf"
-                className="block mt-4 px-4 py-2 border rounded text-center font-mono"
-                style={{ borderColor: 'var(--primary)', color: 'var(--primary)' }}
-              >
-                Resume
-              </a>
+              </div>
             </div>
           )}
         </div>
       </nav>
 
-      {/* Fixed Social Links */}
+      {/* Fixed Social Links (desktop) */}
       <div className="fixed left-6 bottom-0 z-30 hidden lg:block">
-        <div className="flex flex-col items-center space-y-6">
-            {[
-              { icon: <Github size={20} />, href: "https://github.com/arelyyrosendes" },
-              { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arelyrosendes/" },
-              { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com" }
-            ].map((social, index) => (
-              <a
-                key={index}
-                href={social.href}
-                className="transition-all duration-300 hover:-translate-y-1"
-                style={{ color: 'var(--muted)' }}
-              >
-                {social.icon}
-              </a>
-            ))}
-          <div className="w-px h-24 bg-gray-500"></div>
+        <div className="flex flex-col items-center space-y-5">
+          {[
+            { icon: <Github size={20} />, href: "https://github.com/arelyyrosendes" },
+            { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arelyrosendes/" },
+            { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com" }
+          ].map((social, index) => (
+            <a
+              key={index}
+              href={social.href}
+              className="transition-all duration-300 hover:-translate-y-1"
+              style={{ color: 'var(--muted)' }}
+              aria-label="social link"
+            >
+              {social.icon}
+            </a>
+          ))}
+          <div className="w-px h-20" style={{ backgroundColor: 'var(--border)' }} />
         </div>
       </div>
 
-      {/* Fixed Email */}
+      {/* Fixed Email (desktop) */}
       <div className="fixed right-6 bottom-0 z-30 hidden lg:block">
-        <div className="flex flex-col items-center space-y-6">
+        <div className="flex flex-col items-center space-y-5">
           <a
             href="mailto:arelyrosendes@gmail.com"
-            className="text-sm font-mono transition-all duration-300 hover:-translate-y-1"
-            style={{
-              color: 'var(--muted)',
-              writingMode: 'vertical-lr'
-            }}
+            className="text-xs font-mono transition-all duration-300 hover:-translate-y-1 tracking-wide"
+            style={{ color: 'var(--muted)', writingMode: 'vertical-lr' }}
           >
             arelyrosendes@gmail.com
           </a>
-          <div className="w-px h-24 bg-gray-500"></div>
+          <div className="w-px h-20" style={{ backgroundColor: 'var(--border)' }} />
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section
-        ref={heroRef}
-        id="hero"
-        className="min-h-screen flex items-center px-6"
-      >
-        <div className="max-w-6xl mx-auto w-full">
-          <div className={`transition-all duration-1000 ${isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-            <p className="text-base font-mono mb-4" style={{ color: 'var(--muted)' }}>
-              Hi, my name is
-            </p>
-            <h1
-              ref={nameRef}
-              className="text-3xl md:text-7xl font-bold mb-4 animate-typing leading-[1.2]"
-            >
-              Arely Rosendes.
-            </h1>
-            <h2
-              className="text-xl md:text-6xl font-bold mb-6"
-              style={{ color: 'var(--primary)' }}
-            >
-              I build things for the web.
-            </h2>
-            <p
-              className="max-w-xl text-lg leading-relaxed mb-12"
-              style={{ color: 'var(--text)' }}
-            >
-              I'm a computer science student specializing in building exceptional digital experiences.
-              Currently, I'm focused on getting my degree at{' '}
-              <span style={{ color: 'var(--accent)' }}>UC Santa Cruz</span>.
-            </p>
-            <button
-              onClick={() => scrollToSection(projectsRef)}
-              className="px-8 py-4 border border-pink-300 rounded font-mono text-sm transition-all duration-300 hover:bg-pink-300 hover:bg-opacity-10 hover:-translate-y-1"
-              style={{ color: 'var(--primary)', borderColor: 'var(--primary)' }}
-            >
-              Check out my work!
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* About Section */}
-      <section
-        ref={aboutRef}
-        id="about"
-        className="py-20 px-6"
-      >
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center mb-16">
-            <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-              01. About Me
-            </h2>
-            <div className="flex-1 h-px bg-gray-600"></div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="md:col-span-2">
-              <div className="space-y-4 text-lg" style={{ color: 'var(--text)' }}>
-                <p
-                  className="max-w-xl text-lg leading-relaxed mb-12"
-                  style={{ color: 'var(--text)' }}
-                >
-                  Hello! I'm a computer science student passionate about building meaningful, user-focused digital experiences.
-                  I love blending clean functionality with thoughtful design to create interfaces that feel effortless to use.
-                  Currently, I'm completing my degree at{' '}
-                  <span style={{ color: 'var(--accent)' }}>UC Santa Cruz</span>, with a focus on front-end engineering, UI/UX, and full-stack development.
-                  <br /><br />
-                  When I'm not coding, you'll likely find me exploring the outdoors, designing creative side projects, or experimenting in the kitchen — cooking is my favorite creative outlet outside of tech. I love discovering new recipes, plating meals like tiny art pieces, and sharing food with friends.
-                  <br /><br />
-                  I'm driven by curiosity, collaboration, and the joy of bringing ideas to life, one well-built component (and one good recipe) at a time.
+      {/* Main content wrapper: offset for fixed nav */}
+      <main className="pt-24">
+        {/* Hero Section */}
+        <section
+          ref={heroRef}
+          id="hero"
+          className="section hero min-h-[calc(100vh-96px)] flex items-center px-6"
+        >
+          <div className="container max-w-6xl mx-auto w-full">
+            <div className={`hero-card-modern ${isLoaded ? 'hero-card-ready' : ''}`}>
+              <div className="hero-copy">
+                <p className="hero-kicker">Computer Science • Frontend & Full-Stack</p>
+                <h1 ref={nameRef} className="hero-title typing">Arely Rosendes</h1>
+                <h2 className="hero-subtitle">I build websites!</h2>
+                <p className="hero-body">
+                  I’m a computer science student focused on building clean, accessible interfaces with strong engineering foundations.
+                  Currently earning my degree at UC Santa Cruz.
                 </p>
-              </div>
-            </div>
-
-            <div className="relative group">
-              <div
-                className="relative z-10 w-72 h-72 rounded border-2 transition-all duration-300 group-hover:translate-x-2 group-hover:-translate-y-2 overflow-hidden"
-                style={{ borderColor: 'var(--highlight)', backgroundColor: 'var(--surface)' }}
-              >
-                <div
-                  className="w-full h-full flex items-center justify-center text-6xl"
-                  style={{ backgroundColor: 'var(--surface)' }}
-                >
-                  👩‍💻
-                </div>
-                <div
-                  className="absolute inset-0 bg-pink-300 bg-opacity-30 transition-opacity duration-300 group-hover:bg-opacity-0"
-                  style={{ backgroundColor: 'var(--highlight)', opacity: 0.3 }}
-                ></div>
-              </div>
-              <div
-                className="absolute top-4 left-4 w-72 h-72 border-2 -z-10"
-                style={{ borderColor: 'var(--highlight)' }}
-              ></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section ref={skillsRef} id="skills" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-
-          {/* Section Header */}
-          <div className="flex items-center mb-12">
-            <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-              02. Technical Skills
-            </h2>
-            <div className="flex-1 h-px bg-gray-600"></div>
-          </div>
-
-          {/* Skills Lists */}
-          <div className="grid md:grid-cols-2 gap-10 font-mono text-sm" style={{ color: 'var(--text)' }}>
-            {/* Column 1 */}
-            <div className="space-y-6">
-              <div>
-                <p className="text-base mb-2" style={{ color: 'var(--primary)' }}>Programming Languages</p>
-                <p>Python • C/C++ • Java • MIPS Assembly • Bash/Shell</p>
-              </div>
-
-              <div>
-                <p className="text-base mb-2" style={{ color: 'var(--primary)' }}>Web Tools</p>
-                <p>JavaScript • HTML • CSS</p>
-              </div>
-
-              <div>
-                <p className="text-base mb-2" style={{ color: 'var(--primary)' }}>Operating Systems</p>
-                <p>Linux • MacOS</p>
-              </div>
-            </div>
-
-            {/* Column 2 */}
-            <div className="space-y-6">
-              <div>
-                <p className="text-base mb-2" style={{ color: 'var(--primary)' }}>DevOps Tools</p>
-                <p>Git • GitLab • OpenShift • Kubernetes • Docker • OpenAPI</p>
-              </div>
-
-              <div>
-                <p className="text-base mb-2" style={{ color: 'var(--primary)' }}>Certifications</p>
-                <p>AWS (Amazon Web Services)</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section
-        ref={experienceRef}
-        id="experience"
-        className="py-20 px-6"
-      >
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center mb-16">
-            <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-              03. Experience
-            </h2>
-            <div className="flex-1 h-px bg-gray-600"></div>
-          </div>
-
-          {/* Company tabs */}
-          <div className="flex flex-col gap-4 mb-8 overflow-x-auto">
-            {experiences.map((exp, index) => (
-              <button
-                key={index}
-                onClick={() => setSelectedIndex(index)}
-                className={`whitespace-nowrap px-4 py-3 text-left font-mono text-sm border-l-2 border-b-2 transition-all duration-200 ${
-                  selectedIndex === index
-                    ? 'border-pink-300 bg-pink-300 bg-opacity-10 text-pink-300'
-                    : 'border-gray-600 text-gray-400 hover:bg-gray-800'
-                }`}
-                style={
-                  selectedIndex === index
-                    ? { borderColor: 'var(--highlight)', backgroundColor: 'rgba(211, 184, 175, 0.15)', color: 'var(--primary)' }
-                    : { borderColor: 'var(--border)', color: 'var(--muted)', backgroundColor: 'transparent' }
-                }
-              >
-                {exp.title} - {exp.company}
-              </button>
-            ))}
-          </div>
-
-          {/* Experience details */}
-          {experiences[selectedIndex] && (
-            <div className="flex flex-col gap-4">
-              <h3 className="text-xl font-bold">{experiences[selectedIndex].title}</h3>
-              <p className="text-gray-400">
-                {experiences[selectedIndex].company} | {experiences[selectedIndex].location} | {experiences[selectedIndex].period}
-              </p>
-              <ul className="list-disc list-inside text-gray-300 space-y-1">
-                {experiences[selectedIndex].description.map((desc, i) => (
-                  <li key={i}>{desc}</li>
-                ))}
-              </ul>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {experiences[selectedIndex].technologies.map((tech, i) => (
-                  <span key={i} className="text-sm bg-gray-700 px-2 py-1 rounded">{tech}</span>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section
-        ref={projectsRef}
-        id="projects"
-        className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center mb-16">
-            <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-              04. Projects
-            </h2>
-            <div className="flex-1 h-px bg-gray-600"></div>
-          </div>
-
-          {/* Featured Projects */}
-          <div className="space-y-24 mb-24">
-            {projects.filter(p => p.featured).map((project, index) => (
-              <div
-                key={project.title}
-                className="grid md:grid-cols-12 gap-8 items-center"
-              >
-                {/* Project Image */}
-                <div className={`md:col-span-6 ${index % 2 === 1 ? 'md:order-2' : 'md:order-1'}`}>
-                  <div
-                    className="relative group cursor-pointer rounded-lg overflow-hidden h-96 bg-gray-800"
-                    style={{ backgroundColor: 'var(--surface)' }}
-                  >
-                    <div className="absolute inset-0 transition-opacity duration-300 group-hover:bg-opacity-0" style={{ backgroundColor: 'var(--highlight)', opacity: 0.28 }}></div>
-                    <div className="flex items-center justify-center h-full w-full">
-                      {renderProjectImage(project.image as string, project.title)}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Project Description */}
-                <div className={`md:col-span-6 flex flex-col justify-center ${index % 2 === 1 ? 'md:order-1 md:text-right' : 'md:order-2 md:text-left'}`}>
-                  <p className="text-sm font-mono mb-2" style={{ color: 'var(--primary)' }}>
-                    Featured Project
-                  </p>
-                  <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--primary)' }}>
-                    {project.title}
-                  </h3>
-                  <div
-                    className="p-6 rounded-lg mb-4 backdrop-blur-sm"
-                    style={{ backgroundColor: 'rgba(247, 240, 230, 0.8)', border: '1px solid var(--border)', boxShadow: 'var(--shadow)' }}
-                  >
-                    <p style={{ color: 'var(--text)' }}>
-                      {project.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-3 mb-4 font-mono text-sm">
-                    {project.tech.map((tech) => (
-                      <span key={tech} style={{ color: 'var(--muted)' }}>
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex gap-4">
-                    <a
-                      href={project.github}
-                      className="transition-colors duration-200 hover:text-pink-300"
-                      style={{ color: 'var(--primary)' }}
-                    >
-                      <Github size={20} />
+                <div className="hero-actions">
+                  <div className="hero-socials">
+                    <a className="icon-btn" href="https://github.com/arelyyrosendes" aria-label="GitHub">
+                      <Github size={26} />
                     </a>
-                    {project.demo && (
-                      <a
-                        href={project.demo.startsWith('http') ? project.demo : `https://${project.demo}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="transition-colors duration-200 hover:text-pink-300"
-                        style={{ color: 'var(--primary)' }}
-                      >
-                        <ExternalLink size={20} />
-                      </a>
-                    )}
+                    <a className="icon-btn linkedin" href="https://www.linkedin.com/in/arelyrosendes/" aria-label="LinkedIn">
+                      <Linkedin size={26} />
+                    </a>
                   </div>
+                  <button
+                    className="btn resume-btn"
+                    onClick={() => scrollToSection(resumeRef)}
+                  >
+                    Resume <ArrowRight size={18} />
+                  </button>
                 </div>
               </div>
-            ))}
+
+              <div className="hero-visual">
+                <div className="hero-visual-backdrop" />
+                <div className="hero-visual-card">
+                  <img
+                    src="/images/arelyrosendes.jpg"
+                    alt="Arely Rosendes portrait"
+                    className="hero-visual-img"
+                  />
+                </div>
+                <div className="hero-location hero-location-below">
+                  <MapPin size={20} />
+                  <span>UC Santa Cruz</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Resume Section */}
-      <section
-        ref={resumeRef}
-        id="resume"
-        className="py-20 px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="flex items-center justify-center mb-8">
-            <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-              05. View My Resume!
-            </h2>
-          </div>
+        <AboutMe ref={aboutRef} />
+        <TechnicalSkills ref={skillsRef} />
 
-          <h3 className="text-4xl font-bold mb-6" style={{ color: 'var(--primary)' }}>
-            Download or View My Resume
-          </h3>
+        <Experience
+          ref={experienceRef}
+          experiences={experiences}
+          selectedIndex={selectedIndex}
+          onSelect={setSelectedIndex}
+        />
 
-          <p className="text-lg mb-12 max-w-lg mx-auto leading-relaxed" style={{ color: 'var(--text)' }}>
-            You can download a PDF version of my resume or view it directly in your browser.
-          </p>
+        <Projects
+          ref={projectsRef}
+          projects={projects}
+          renderProjectImage={renderProjectImage}
+        />
 
-          <div className="flex justify-center gap-4 flex-wrap">
-            {/* Download Resume */}
-            <a
-              href="/resume.pdf"
-              download
-              className="inline-block px-8 py-4 border border-pink-300 rounded font-mono transition-all duration-300 hover:bg-pink-300 hover:bg-opacity-10 hover:-translate-y-1"
-              style={{ color: 'var(--primary)', borderColor: 'var(--primary)' }}>
-              Download Resume
-            </a>
-
-            {/* View Resume */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-8 py-4 border border-pink-300 rounded font-mono transition-all duration-300 hover:bg-pink-300 hover:bg-opacity-10 hover:-translate-y-1"
-              style={{ color: 'var(--primary)', borderColor: 'var(--primary)' }}>
-              View Resume
-            </a>
-          </div>
-        </div>
-      </section>
+        <Resume ref={resumeRef} />
+      </main>
 
       {/* Footer */}
-      <footer className="py-8 px-6 text-center">
-        <div className="max-w-6xl mx-auto">
+      <footer className="py-10 px-6 text-center">
+        <div className="container max-w-6xl mx-auto">
           <div className="flex flex-col items-center space-y-4 md:hidden">
             <div className="flex space-x-6">
               {[
@@ -723,6 +486,7 @@ const Portfolio: React.FC = () => {
                   href={social.href}
                   className="transition-all duration-300 hover:-translate-y-1"
                   style={{ color: 'var(--muted)' }}
+                  aria-label="social link"
                 >
                   {social.icon}
                 </a>
@@ -730,10 +494,7 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
 
-          <p
-            className="font-mono text-sm mt-8"
-            style={{ color: 'var(--muted)' }}
-          >
+          <p className="font-mono text-sm mt-6" style={{ color: 'var(--muted)' }}>
             Built with React & TypeScript by Arely Rosendes
           </p>
         </div>
