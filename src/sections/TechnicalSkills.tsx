@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 const TechnicalSkills = forwardRef<HTMLElement>((_, ref) => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
