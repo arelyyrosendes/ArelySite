@@ -346,44 +346,6 @@ const Portfolio: React.FC = () => {
         </div>
       </nav>
 
-      {/* Fixed Social Links (desktop) */}
-      <div className="fixed left-6 bottom-0 z-30 hidden lg:block">
-        <div className="flex flex-col items-center space-y-5">
-          {[
-            { icon: <Github size={20} />, href: "https://github.com/arelyyrosendes" },
-            { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arelyrosendes/" },
-            { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com?subject=Hello%20Arely" }
-          ].map((social, index) => (
-            <a
-              key={index}
-              href={social.href}
-              target={social.href.startsWith('http') ? "_blank" : undefined}
-              rel={social.href.startsWith('http') ? "noopener noreferrer" : undefined}
-              className="transition-all duration-300 hover:-translate-y-1"
-              style={{ color: 'var(--muted)' }}
-              aria-label="social link"
-            >
-              {social.icon}
-            </a>
-          ))}
-          <div className="w-px h-20" style={{ backgroundColor: 'var(--border)' }} />
-        </div>
-      </div>
-
-      {/* Fixed Email (desktop) */}
-      <div className="fixed right-6 bottom-0 z-30 hidden lg:block">
-        <div className="flex flex-col items-center space-y-5">
-          <a
-            href="mailto:arelyrosendes@gmail.com"
-            className="text-xs font-mono transition-all duration-300 hover:-translate-y-1 tracking-wide"
-            style={{ color: 'var(--muted)', writingMode: 'vertical-lr' }}
-          >
-            arelyrosendes@gmail.com
-          </a>
-          <div className="w-px h-20" style={{ backgroundColor: 'var(--border)' }} />
-        </div>
-      </div>
-
       {/* Main content wrapper*/}
       <main className="pt-24">
         {/* Hero Section */}
@@ -430,7 +392,7 @@ const Portfolio: React.FC = () => {
               <div className="hero-visual">
                 <div className="hero-visual-card">
                   <img
-                    src="/images/arelyrosendes.jpg"
+                    src="/images/arelyrosendes.png"
                     alt="Arely Rosendes portrait"
                     className="hero-visual-img"
                   />
