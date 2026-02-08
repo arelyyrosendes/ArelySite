@@ -62,6 +62,7 @@ body {
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font);
   line-height: var(--lh);
   color: var(--text);
@@ -116,12 +117,12 @@ a:hover {
 
 /* ---------- Layout ---------- */
 .container {
-  width: min(var(--maxw), calc(100% - 40px));
+  width: min(var(--maxw), calc(100% - 24px));
   margin: 0 auto;
 }
 
 .section {
-  padding: 72px 0;
+  padding: 30px 0;
 }
 
 .stack {
@@ -176,6 +177,12 @@ h2 {
 
 h3 {
   font-size: 18px;
+}
+
+/* Section headings responsive helper */
+.section-heading {
+  font-size: clamp(22px, 6vw, 34px);
+  line-height: 1.2;
 }
 
 p {
@@ -242,6 +249,7 @@ p {
 /* ---------- Hero ---------- */
 .hero {
   padding: 76px 0 44px;
+  margin-bottom: 32px;
 }
 
 .hero-card {
@@ -619,4 +627,126 @@ select:focus {
   margin-top: 14px;
   justify-self: center;
   text-align: center;
+}
+
+/* ---------- Responsive Tweaks ---------- */
+@media (max-width: 900px) {
+  .section {
+    padding: 30px 0;
+  }
+  .container {
+    width: calc(100% - 18px);
+  }
+  .hero {
+    padding-top: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 48px;
+  }
+  .hero-card-modern {
+    padding: 18px;
+    gap: 24px;
+  }
+  .hero-title {
+    font-size: clamp(30px, 8vw, 42px);
+    align-items: center;
+  }
+  .hero-subtitle {
+    align-items: center;
+    font-size: clamp(20px, 6vw, 30px);
+  }
+  .hero-body {
+    font-size: 16px;
+    line-height: 1.6;
+    align-items: center;
+  }
+  .hero-visual-card {
+    width: clamp(220px, 80vw, 360px);
+  }
+  .hero-location {
+    width: fit-content;
+  }
+
+  /* Project image sizing */
+  .project-image-card {
+    height: 260px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 46px 0;
+  }
+  h1 {
+    font-size: clamp(28px, 9vw, 38px);
+  }
+  h2 {
+    font-size: clamp(22px, 7vw, 30px);
+  }
+  .hero-card-modern {
+    padding: 16px;
+    gap: 18px;
+  }
+  .hero-title {
+    font-size: clamp(28px, 10vw, 36px);
+  }
+  .hero-subtitle {
+    font-size: clamp(18px, 7vw, 26px);
+  }
+  .hero-body {
+    font-size: 15px;
+  }
+  .hero-visual-card {
+    width: clamp(210px, 90vw, 320px);
+  }
+  .hero-location-below {
+    margin-top: 10px;
+  }
+  .nav {
+    gap: 12px;
+  }
+
+  /* Project image sizing */
+  .project-image-card {
+    height: 220px;
+  }
+}
+
+/* Force mobile stacking at ≤900px even for md: classes */
+@media (max-width: 900px) {
+  .md\:grid-cols-12,
+  .md\:grid-cols-7,
+  .md\:grid-cols-6,
+  .md\:grid-cols-5,
+  .md\:grid-cols-3,
+  .md\:grid-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .md\:col-span-12,
+  .md\:col-span-7,
+  .md\:col-span-6,
+  .md\:col-span-5,
+  .md\:col-span-3,
+  .md\:col-span-2,
+  .md\:col-span-1 {
+    grid-column: auto !important;
+  }
+
+  .md\:order-2,
+  .md\:order-1 {
+    order: initial !important;
+  }
+
+  .md\:text-right {
+    text-align: left !important;
+  }
+
+  .md\:items-end {
+    align-items: flex-start !important;
+  }
+
+  .md\:justify-end {
+    justify-content: flex-start !important;
+  }
 }

@@ -4,17 +4,17 @@ const AboutMe = forwardRef<HTMLElement>((_, ref) => (
   <section
     ref={ref}
     id="about"
-    className="pt-10 pb-6 px-6"
+    className="section px-6"
   >
     <div className="container max-w-6xl mx-auto">
       <div className="flex items-center mb-10">
-        <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
+        <h2 className="section-heading font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
           01. About Me
         </h2>
         <div className="flex-1 h-px bg-gray-600"></div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-10 items-start max-h-[390px]">
+      <div className="grid md:grid-cols-3 gap-10 items-start max-h-90%">
         <div className="md:col-span-2">
           <div className="space-y-4 text-lg" style={{ color: 'var(--text)' }}>
             <p

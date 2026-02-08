@@ -79,11 +79,11 @@ const TechnicalSkills = forwardRef<HTMLElement>((_, ref) => {
       <div className="container max-w-6xl mx-auto relative z-10">
         {/* Section Header with enhanced styling */}
         <div className="flex items-center mb-10">
-        <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-          02. Technical Skills
-        </h2>
-        <div className="flex-1 h-px bg-gray-600"></div>
-      </div>
+          <h2 className="section-heading font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
+            02. Technical Skills
+          </h2>
+          <div className="flex-1 h-px bg-gray-600"></div>
+        </div>
 
         {/* Skills Grid with card-based layout */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

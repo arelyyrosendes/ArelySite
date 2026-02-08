@@ -24,11 +24,11 @@ const Experience = forwardRef<HTMLElement, ExperienceProps>(
     >
       <div className="container max-w-6xl mx-auto">
         <div className="flex items-center mb-10">
-        <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-          03. Experiencs
-        </h2>
-        <div className="flex-1 h-px bg-gray-600"></div>
-      </div>
+          <h2 className="section-heading font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
+            03. Experience
+          </h2>
+          <div className="flex-1 h-px bg-gray-600"></div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8 items-start">
           {/* Company list (left) */}

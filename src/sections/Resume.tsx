@@ -7,7 +7,7 @@ const Resume = forwardRef<HTMLElement>((_, ref) => (
     className="section py-20 px-6">
     <div className="container max-w-6xl mx-auto relative z-10">
       <div className="flex items-center mb-10">
-        <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
+        <h2 className="section-heading font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
           05. Resume
         </h2>
         <div className="flex-1 h-px bg-gray-600"></div>

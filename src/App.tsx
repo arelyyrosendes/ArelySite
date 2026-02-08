@@ -10,6 +10,7 @@ const Portfolio: React.FC = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [, setIsScrolled] = useState(false);
 
@@ -23,6 +24,9 @@ const Portfolio: React.FC = () => {
 
   useEffect(() => {
     setIsLoaded(true);
+    const syncIsMobile = () => setIsMobile(window.innerWidth <= 900);
+    syncIsMobile();
+    window.addEventListener('resize', syncIsMobile);
 
     const updateTypingWidth = () => {
       const el = nameRef.current;
@@ -84,6 +88,7 @@ const Portfolio: React.FC = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', syncIsMobile);
       ro.disconnect();
     };
   }, []);
@@ -208,25 +213,11 @@ const Portfolio: React.FC = () => {
 
 
   const navItems = [
-    { label: 'About', ref: aboutRef, id: 'about', subpages: [] },
-    { label: 'Skills', ref: skillsRef, id: 'skills', subpages: [] },
-    {
-      label: 'Experience',
-      ref: experienceRef,
-      id: 'experience',
-      subpages: experiences.map(exp => ({
-        label: exp.company,
-        action: () => {
-          scrollToSection(experienceRef);
-          setTimeout(() => {
-            const index = experiences.findIndex(e => e.company === exp.company);
-            setSelectedIndex(index);
-          }, 450);
-        }
-      }))
-    },
-    { label: 'Projects', ref: projectsRef, id: 'projects', subpages: [] },
-    { label: 'Resume', ref: resumeRef, id: 'resume', subpages: [] }
+    { label: 'About', ref: aboutRef, id: 'about' },
+    { label: 'Skills', ref: skillsRef, id: 'skills' },
+    { label: 'Experience', ref: experienceRef, id: 'experience' },
+    { label: 'Projects', ref: projectsRef, id: 'projects' },
+    { label: 'Resume', ref: resumeRef, id: 'resume' }
   ];
 
   const renderProjectImage = (image: string | undefined, title: string): JSX.Element | null => {
@@ -286,7 +277,7 @@ const Portfolio: React.FC = () => {
           boxShadow: '0 6px 16px rgba(80, 84, 94, 0.12)'
         }}
       >
-        <div className="container max-w-6xl mx-auto px-6 py-3">
+        <div className="container max-w-6xl mx-auto px-6 py-3" style={{ paddingInline: '14px' }}>
           <div className="flex justify-between items-center">
             <div
               className="flex items-center gap-1 px-1 py-1 rounded-lg"
@@ -302,7 +293,7 @@ const Portfolio: React.FC = () => {
             </div>
 
             {/* Desktop Menu */}
-            <div className="flex items-center gap-8">
+            <div className={`${isMobile ? 'hidden' : 'flex'} items-center gap-8`}>
               {navItems.map((item) => (
                 <button
                   key={item.id}
@@ -319,7 +310,7 @@ const Portfolio: React.FC = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 rounded-md"
+              className={`${isMobile ? 'flex' : 'hidden'} p-2 rounded-md`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-expanded={isMenuOpen}
               aria-label="Toggle menu"
@@ -330,9 +321,9 @@ const Portfolio: React.FC = () => {
           </div>
 
           {/* Mobile Menu */}
-          {isMenuOpen && (
+          {isMenuOpen && isMobile && (
             <div
-              className="md:hidden mt-3 p-4 rounded-xl"
+              className="mt-3 p-4 rounded-xl"
               style={{
                 backgroundColor: 'rgba(253,248,243,0.92)',
                 border: '1px solid var(--border)'
@@ -349,14 +340,6 @@ const Portfolio: React.FC = () => {
                     {item.label}
                   </button>
                 ))}
-
-                <button
-                  onClick={() => window.open('/resume.pdf', '_blank')}
-                  className="mt-2 px-4 py-2 rounded-md font-mono text-sm border"
-                  style={{ borderColor: 'var(--border)', color: 'var(--safe)' }}
-                >
-                  Open Resume PDF
-                </button>
               </div>
             </div>
           )}
@@ -407,10 +390,13 @@ const Portfolio: React.FC = () => {
         <section
           ref={heroRef}
           id="hero"
-          className="section hero max-h-[calc(95vh-96px)] flex items-center px-6"
+          className="section hero min-h-[calc(95vh-96px)] flex items-center px-6"
         >
           <div className="container max-w-6xl mx-auto w-full">
-            <div className={`hero-card-modern ${isLoaded ? 'hero-card-ready' : ''}`}>
+            <div
+              key={isMobile ? 'hero-mobile' : 'hero-desktop'}
+              className={`hero-card-modern ${isLoaded ? 'hero-card-ready' : ''}`}
+            >
               <div className="hero-copy">
                 <p className="hero-kicker">Computer Science • Frontend & Full-Stack</p>
                 <h1 ref={nameRef} className="hero-title typing">Arely Rosendes</h1>
