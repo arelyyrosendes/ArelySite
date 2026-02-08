@@ -444,7 +444,7 @@ select:focus {
 .hero-title.typing {
   overflow: hidden;
   width: 0;
-  animation: hero-typing 2s steps(var(--typing-steps, 10)) forwards;
+  animation: hero-typing 1.6s steps(var(--typing-steps, 8)) forwards;
 }
 
 .hero-subtitle {
@@ -647,10 +647,13 @@ select:focus {
   .hero-card-modern {
     padding: 18px;
     gap: 24px;
+    overflow: hidden;
   }
   .hero-title {
     font-size: clamp(30px, 8vw, 42px);
     align-items: center;
+    white-space: normal;
+    text-align: left;
   }
   .hero-subtitle {
     align-items: center;
@@ -663,9 +666,17 @@ select:focus {
   }
   .hero-visual-card {
     width: clamp(220px, 80vw, 360px);
+    max-width: 100%;
   }
   .hero-location {
     width: fit-content;
+  }
+  .hero-title.typing {
+    width: auto;
+    animation: none;
+  }
+  .hero-copy {
+    word-break: break-word;
   }
 
   /* Project image sizing */
