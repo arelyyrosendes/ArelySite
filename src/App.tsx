@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, Menu, X, ArrowRight, MapPin } from 'lucide-react';
+import { Github, Linkedin, Mail, Menu, X, MapPin } from 'lucide-react';
 import AboutMe from './sections/AboutMe';
 import Experience from './sections/Experience';
 import Projects from './sections/Projects';
@@ -366,8 +366,7 @@ const Portfolio: React.FC = () => {
                 <p className="hero-body">
                   Fourth-year Computer Science student at{' '}
                   <span style={{ color: 'var(--natural)', fontWeight: 600 }}>UC Santa Cruz</span>{' '}
-                  who loves building websites, full-stack applications, and projects that feel both
-                  easy and enjoyable to use.
+                  who loves building websites, full-stack applications, and projects that are enjoyable to use.
                 </p>
                 <div className="hero-actions">
                   <div className="hero-socials">
@@ -378,14 +377,14 @@ const Portfolio: React.FC = () => {
                       <Linkedin size={26} />
                     </a>
                   </div>
-                  <a
+                  {/* <a
                     className="btn resume-btn"
                     href="/Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     Resume <ArrowRight size={18} />
-                  </a>
+                  </a> */}
                 </div>
               </div>
 
