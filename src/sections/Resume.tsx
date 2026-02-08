@@ -24,7 +24,7 @@ const Resume = forwardRef<HTMLElement>((_, ref) => (
       <div className="flex justify-center gap-4 flex-wrap">
         {/* Download Resume */}
         <a
-          href="/images/Arely Rosendes Resume.pdf"
+          href="/Arely Rosendes Resume.pdf"
           download
           className="inline-block px-8 py-4 border border-pink-300 rounded font-mono transition-all duration-300 hover:bg-pink-300 hover:bg-opacity-10 hover:-translate-y-1"
           style={{ color: 'var(--primary)', borderColor: 'var(--primary)' }}>
@@ -33,7 +33,7 @@ const Resume = forwardRef<HTMLElement>((_, ref) => (
 
         {/* View Resume */}
         <a
-          href="/images/Arely Rosendes Resume.pdf"
+          href="/Arely Rosendes Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block px-8 py-4 border border-pink-300 rounded font-mono transition-all duration-300 hover:bg-pink-300 hover:bg-opacity-10 hover:-translate-y-1"
