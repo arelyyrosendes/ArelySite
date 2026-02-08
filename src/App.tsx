@@ -109,7 +109,7 @@ const Portfolio: React.FC = () => {
         "Tour booking website for UCSC's Baskin Engineering Student Ambassador program. Built with React and Firebase, featuring real-time scheduling, admin dashboard, and secure authentication.",
       tech: ["Typescript", "React", "Firebase", "Tailwind CSS"],
       github: "https://github.com/natanielj/BESABooking",
-      demo: "https://besabooking.vercel.app",
+      demo: "https://besa-booking.vercel.app/",
       featured: true,
       image: "/images/BESA_Booking.png"
     },
@@ -371,10 +371,10 @@ const Portfolio: React.FC = () => {
                 </p>
                 <div className="hero-actions">
                   <div className="hero-socials">
-                    <a className="icon-btn" href="https://github.com/arelyyrosendes" aria-label="GitHub">
+                  <a className="icon-btn" href="https://github.com/arelyyrosendes" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
                       <Github size={26} />
                     </a>
-                    <a className="icon-btn linkedin" href="https://www.linkedin.com/in/arelyrosendes/" aria-label="LinkedIn">
+                    <a className="icon-btn linkedin" href="https://www.linkedin.com/in/arelyrosendes/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                       <Linkedin size={26} />
                     </a>
                   </div>
@@ -431,15 +431,15 @@ const Portfolio: React.FC = () => {
           <div className="flex flex-col items-center space-y-4 md:hidden">
             <div className="flex space-x-6">
               {[
-                { icon: <Github size={20} />, href: "https://github.com/arelyyrosendes" },
-                { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arelyrosendes/" },
+                { icon: <Github size={20} />, href: "https://github.com/arelyyrosendes", external: true },
+                { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arelyrosendes/", external: true },
                 { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com?subject=Hello%20Arely" }
               ].map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
-                  target={social.href.startsWith('http') ? "_blank" : undefined}
-                  rel={social.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                  target={social.external ? "_blank" : social.href.startsWith('http') ? "_blank" : undefined}
+                  rel={social.external || social.href.startsWith('http') ? "noopener noreferrer" : undefined}
                   className="transition-all duration-300 hover:-translate-y-1"
                   style={{ color: 'var(--muted)' }}
                   aria-label="social link"

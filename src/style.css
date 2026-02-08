@@ -119,6 +119,7 @@ a:hover {
 .container {
   width: min(var(--maxw), calc(100% - 24px));
   margin: 0 auto;
+  padding-inline: 20px;
 }
 
 .section {
