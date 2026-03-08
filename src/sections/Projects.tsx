@@ -1,26 +1,20 @@
 import { forwardRef, useState } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
-
-type Project = {
-  title: string;
-  description: string;
-  tech: string[];
-  github: string;
-  demo: string | null;
-  featured: boolean;
-  image?: string;
-};
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Project } from '../types/project';
 
 type ProjectsProps = {
   projects: Project[];
   renderProjectImage: (image: string | undefined, title: string) => JSX.Element | null;
+  showAll?: boolean;
+  sectionTitle?: string;
 };
 
 const Projects = forwardRef<HTMLElement, ProjectsProps>(
-  ({ projects, renderProjectImage }, ref) => {
+  ({ projects, renderProjectImage, showAll = false, sectionTitle = '04. Projects' }, ref) => {
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-
     const featuredProjects = projects.filter(p => p.featured);
+    const visibleProjects = showAll ? projects : featuredProjects;
 
     return (
       <section ref={ref} id="projects" className="section py-20 px-6 relative overflow-hidden">
@@ -33,16 +27,18 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
 
         <div className="container max-w-6xl mx-auto relative z-10">
           {/* Enhanced Section Header */}
-          <div className="flex items-center mb-10">
-        <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-          04. Projects
-        </h2>
-        <div className="flex-1 h-px bg-gray-600"></div>
-      </div>
+          {sectionTitle && (
+            <div className="flex items-center mb-10">
+              <h2 className="text-3xl font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
+                {sectionTitle}
+              </h2>
+              <div className="flex-1 h-px bg-gray-600"></div>
+            </div>
+          )}
 
           {/* Featured Projects */}
           <div className="space-y-32">
-            {featuredProjects.map((project, index) => {
+            {visibleProjects.map((project, index) => {
               const isEven = index % 2 === 0;
               const isHovered = hoveredProject === project.title;
               
@@ -132,7 +128,7 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
                           className="w-2 h-2 rounded-full animate-pulse"
                           style={{ backgroundColor: 'var(--natural)' }}
                         />
-                        Featured Project
+                        {project.featured ? 'Featured Project' : 'Project Highlight'}
                       </div>
 
                       {/* Project title */}
@@ -240,6 +236,19 @@ const Projects = forwardRef<HTMLElement, ProjectsProps>(
               );
             })}
           </div>
+
+          {!showAll && (
+            <div className="flex justify-center mt-16">
+              <Link
+                to="/more-projects"
+                className="inline-flex items-center gap-3 px-8 py-4 border border-pink-300 rounded font-mono text-sm transition-all duration-300 hover:bg-pink-300 hover:bg-opacity-10 hover:-translate-y-1"
+                style={{ color: 'var(--primary)', borderColor: 'var(--primary)' }}
+              >
+                More Projects
+                <ArrowRight size={18} />
+              </Link>
+            </div>
+          )}
 
           {/* Decorative elements */}
           <div className="absolute top-1/4 left-0 w-96 h-96 opacity-5 pointer-events-none">

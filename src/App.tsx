@@ -5,6 +5,8 @@ import Experience from './sections/Experience';
 import Projects from './sections/Projects';
 import Resume from './sections/Resume';
 import TechnicalSkills from './sections/TechnicalSkills';
+import { projects } from './data/projects';
+import { renderProjectImage } from './utils/renderProjectImage';
 
 const Portfolio: React.FC = () => {
   const [activeSection, setActiveSection] = useState('hero');
