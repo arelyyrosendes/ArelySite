@@ -113,7 +113,7 @@ const Portfolio: React.FC = () => {
       github: "https://github.com/natanielj/BESABooking",
       demo: "https://besa-booking.vercel.app/",
       featured: true,
-      image: "/images/BESA_Booking.png"
+      image: "/images/BESA_Booking.gif"
     },
     {
       title: "ChariWork",
@@ -123,7 +123,7 @@ const Portfolio: React.FC = () => {
       github: "https://github.com/PouriaRez/ChariWork",
       demo: "https://chari-work-115.vercel.app/",
       featured: true,
-      image: "/images/ChariWork.png"
+      image: "/images/ChariWork.gif"
     },
     {
       title: "Portfolio for UCLA EE Engineer",
@@ -133,7 +133,7 @@ const Portfolio: React.FC = () => {
       github: "https://github.com/agonzalez85/andys-Website",
       demo: "https://andygonzalez.me/",
       featured: true,
-      image: "/images/andy_website.png"
+      image: "/images/andy_website.gif"
     },
     {
       title: "Meal Planner App",
