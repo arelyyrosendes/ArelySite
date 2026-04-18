@@ -21,22 +21,14 @@ const AboutMe = forwardRef<HTMLElement>((_, ref) => (
               className="max-w-2xl text-lg leading-relaxed mb-6"
               style={{ color: 'var(--text)' }}
             >
-              Hello! I’m a Computer Science student passionate about building intuitive,
-              user-focused digital experiences. I enjoy combining clean functionality with
-              thoughtful design to create interfaces that feel seamless and accessible.
-              I’m currently completing my degree at{' '}
-              <span style={{ color: 'var(--accent)' }}>UC Santa Cruz</span>, with a focus on
-              front-end engineering, UI/UX, and full-stack development.
+              Hello! I’m a Computer Science graduate who builds full-stack websites and web applications. I focus on making interfaces that are simple, responsive, and easy to use, with clean code behind them.
               <br />
               <br />
-              Outside of coding, I love spending time at the beach, working on creative side
-              projects, and experimenting in the kitchen—cooking is my favorite creative
-              outlet beyond tech. I enjoy exploring new ideas, refining details, and sharing
-              what I build with others.
+              I graduated from{' '}
+              <span style={{ color: 'var(--accent)' }}>UC Santa Cruz</span>, where I worked on projects involving React, Firebase, and backend systems. My work includes building booking platforms, dashboards, and tools that people can actually use.
               <br />
               <br />
-              I’m driven by curiosity, collaboration, and turning ideas into polished,
-              impactful products.
+              Outside of coding, I enjoy going to the beach, working on side projects, and cooking. I like building things, improving them over time, and sharing them with others.
             </p>
           </div>
         </div>

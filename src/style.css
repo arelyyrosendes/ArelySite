@@ -448,7 +448,7 @@ select:focus {
 }
 
 .hero-subtitle {
-  font-size: clamp(20px, 3.2vw, 20px);
+  font-size: clamp(18px, 3.2vw, 15px);
   margin: 0;
   color: var(--safe);
 }

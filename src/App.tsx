@@ -360,13 +360,13 @@ const Portfolio: React.FC = () => {
               className={`hero-card-modern ${isLoaded ? 'hero-card-ready' : ''}`}
             >
               <div className="hero-copy">
-                <p className="hero-kicker">Computer Science • Frontend & Full-Stack</p>
+                <p className="hero-kicker">Computer Science • Web Development & Full-Stack</p>
                 <h1 ref={nameRef} className="hero-title typing">Arely Rosendes</h1>
-                <h2 className="hero-subtitle">Turning ideas into intuitive web experiences</h2>
+                <h2 className="hero-subtitle">From concept to deployment; I build websites!</h2>
                 <p className="hero-body">
-                  Fourth-year Computer Science student at{' '}
+                  Computer Science graduate from{' '}
                   <span style={{ color: 'var(--natural)', fontWeight: 600 }}>UC Santa Cruz</span>{' '}
-                  who loves building websites, full-stack applications, and projects that are enjoyable to use.
+                  building full-stack websites and web applications with a strong focus on usability, performance, and real-world impact.
                 </p>
                 <div className="hero-actions">
                   <div className="hero-socials">
