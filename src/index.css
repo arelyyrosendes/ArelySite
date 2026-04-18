@@ -8,7 +8,7 @@
   font-family: 'JetBrains Mono', 'Fira Code', 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: light dark;
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -23,7 +23,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #001f3f;
+  background-color: var(--bg);
 }
 
 #root {
@@ -41,16 +41,16 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #001f3f;
+  background: rgba(36, 55, 70, 0.08);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #5b6d8c;
+  background: rgba(36, 55, 70, 0.35);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #f7cac9;
+  background: var(--highlight);
 }
 
 /* Font families */
@@ -149,19 +149,19 @@ html {
 
 /* Selection colors */
 ::selection {
-  background-color: #f7cac9;
-  color: #001f3f;
+  background-color: var(--highlight);
+  color: #1d2e3b;
 }
 
 ::-moz-selection {
-  background-color: #f7cac9;
-  color: #001f3f;
+  background-color: var(--highlight);
+  color: #1d2e3b;
 }
 
 /* Focus styles */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #f7cac9;
+  outline: 2px solid var(--highlight);
   outline-offset: 2px;
 }
 

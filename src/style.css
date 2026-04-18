@@ -9,23 +9,23 @@
 
 :root {
   /* Brand palette */
-  --safe: #50545e;
-  --natural: #859b78;
-  --nurturing: #c6a59a;
-  --calm: #f6f0e9;
+  --safe: #243746;
+  --natural: #2f7a68;
+  --nurturing: #d5a36f;
+  --calm: #f5efe6;
 
   /* Core surfaces */
   --bg: var(--calm);
-  --surface: #fdf8f3;
-  --surface-soft: rgba(246, 240, 233, 0.75);
+  --surface: #fffaf4;
+  --surface-soft: rgba(255, 250, 244, 0.8);
 
   /* Text */
-  --text: #2f3136;
-  --muted: #6b6f79;
+  --text: #26313b;
+  --muted: #667684;
 
   /* UI */
-  --border: rgba(80, 84, 94, 0.18);
-  --shadow: 0 14px 40px rgba(80, 84, 94, 0.12);
+  --border: rgba(36, 55, 70, 0.16);
+  --shadow: 0 18px 48px rgba(36, 55, 70, 0.12);
 
   /* Accents */
   --primary: var(--safe);
@@ -69,12 +69,12 @@ body {
   background:
     radial-gradient(
       1000px 520px at 15% 0%,
-      rgba(133, 155, 120, 0.25),
+      rgba(47, 122, 104, 0.2),
       transparent 60%
     ),
     radial-gradient(
       900px 500px at 100% 20%,
-      rgba(198, 165, 154, 0.28),
+      rgba(213, 163, 111, 0.24),
       transparent 55%
     ),
     repeating-linear-gradient(
@@ -249,8 +249,8 @@ p {
 
 /* ---------- Hero ---------- */
 .hero {
-  padding: 76px 0 44px;
-  margin-bottom: 32px;
+  padding: 44px 0 20px;
+  margin-bottom: 20px;
 }
 
 .hero-card {
@@ -405,7 +405,7 @@ select:focus {
 
   background: radial-gradient(
     circle at 30% 30%,
-    rgba(198, 165, 154, 0.55),
+    rgba(213, 163, 111, 0.34),
     transparent 65%
   );
 
@@ -448,16 +448,43 @@ select:focus {
 }
 
 .hero-subtitle {
-  font-size: clamp(18px, 3.2vw, 15px);
+  font-size: clamp(18px, 2.1vw, 24px);
   margin: 0;
   color: var(--safe);
+  max-width: 30ch;
 }
 
 .hero-body {
   margin: 8px 0 4px;
-  font-size: 18px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.6;
   color: var(--text);
+}
+
+.hero-service-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.hero-service-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 8px 20px rgba(36, 55, 70, 0.06);
+}
+
+.hero-service-dot {
+  width: 9px;
+  height: 9px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--natural), var(--highlight));
+  flex: 0 0 auto;
 }
 
 .hero-actions {
@@ -468,9 +495,92 @@ select:focus {
   margin-top: 6px;
 }
 
+.hero-primary-cta {
+  display: grid;
+  gap: 8px;
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero-proof-point {
+  font-size: 13px;
+  color: var(--natural);
+  font-weight: 700;
+  padding-left: 4px;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 18px;
+  min-height: 50px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(36, 55, 70, 0.12);
+}
+
+.cta-btn-primary {
+  background: var(--safe);
+  color: #fff;
+}
+
+.cta-btn-primary:hover {
+  background: #1d2e3b;
+}
+
+.cta-btn-secondary {
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--safe);
+  border-color: var(--border);
+}
+
 .hero-socials {
   display: flex;
   gap: 10px;
+}
+
+.hero-social-link {
+  position: relative;
+}
+
+.hero-social-tooltip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(4px);
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(255, 250, 244, 0.96);
+  color: var(--primary);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 20px rgba(36, 55, 70, 0.12);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.hero-social-link:hover .hero-social-tooltip,
+.hero-social-link:focus-visible .hero-social-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .icon-btn {
@@ -631,6 +741,47 @@ select:focus {
   text-align: center;
 }
 
+.hero-availability-badge {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(47, 122, 104, 0.24);
+  background: rgba(47, 122, 104, 0.1);
+  color: var(--natural);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(47, 122, 104, 0.08);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 48rem;
+}
+
+.about-card {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 28px rgba(36, 55, 70, 0.08);
+}
+
+.about-card h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.about-card p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 /* ---------- Responsive Tweaks ---------- */
 @media (max-width: 900px) {
   .section {
@@ -640,10 +791,11 @@ select:focus {
     width: calc(100% - 18px);
   }
   .hero {
-    padding-top: 20px;
+    padding-top: 8px;
+    padding-bottom: 12px;
     padding-left: 12px;
     padding-right: 12px;
-    margin-bottom: 48px;
+    margin-bottom: 28px;
   }
   .hero-card-modern {
     padding: 18px;
@@ -659,7 +811,8 @@ select:focus {
   }
   .hero-subtitle {
     align-items: center;
-    font-size: clamp(20px, 6vw, 25px);
+    font-size: clamp(18px, 5.2vw, 22px);
+    max-width: none;
   }
   .hero-body {
     font-size: 16px;
@@ -679,6 +832,10 @@ select:focus {
   }
   .hero-copy {
     word-break: break-word;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
   }
 
   /* Project image sizing */
@@ -711,7 +868,7 @@ select:focus {
     font-size: clamp(24px, 8vw, 32px);
   }
   .hero-subtitle {
-    font-size: clamp(16px, 6.5vw, 22px);
+    font-size: clamp(16px, 5.4vw, 20px);
   }
   .hero-body {
     font-size: 14px;

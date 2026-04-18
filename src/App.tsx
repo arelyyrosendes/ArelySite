@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Github, Linkedin, Mail, Menu, X, MapPin } from 'lucide-react';
+import { ArrowRight, ClipboardList, Github, Linkedin, Mail, Menu, X, MapPin } from 'lucide-react';
 import AboutMe from './sections/AboutMe';
 import Experience from './sections/Experience';
 import Projects from './sections/Projects';
@@ -7,6 +7,8 @@ import Resume from './sections/Resume';
 import TechnicalSkills from './sections/TechnicalSkills';
 
 const Portfolio: React.FC = () => {
+  const projectInquiryLink =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfmvM-wNyIlgRc5ezSuVZkDBDrGCHdJ8JvNu5fY9ax_VsTDZw/viewform?usp=publish-editor";
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -60,10 +62,10 @@ const Portfolio: React.FC = () => {
 
       const sections = [
         { id: 'hero', ref: heroRef },
-        { id: 'about', ref: aboutRef },
-        { id: 'skills', ref: skillsRef },
-        { id: 'experience', ref: experienceRef },
         { id: 'projects', ref: projectsRef },
+        { id: 'skills', ref: skillsRef },
+        { id: 'about', ref: aboutRef },
+        { id: 'experience', ref: experienceRef },
         { id: 'resume', ref: resumeRef }
       ];
 
@@ -101,12 +103,11 @@ const Portfolio: React.FC = () => {
     setIsMenuOpen(false);
   };
 
-  // projects - use public/ paths by referencing root ("/ChariWork.png")
   const projects = [
     {
       title: "UCSC Baskin Booking Website",
       description:
-        "Tour booking website for UCSC's Baskin Engineering Student Ambassador program. Built with React and Firebase, featuring real-time scheduling, admin dashboard, and secure authentication.",
+        "A scheduling platform for a university ambassador program that makes tour signups easier for prospective students and simpler for staff to manage. Built with React and Firebase with secure authentication, real-time scheduling, and an admin dashboard.",
       tech: ["Typescript", "React", "Firebase", "Tailwind CSS"],
       github: "https://github.com/natanielj/BESABooking",
       demo: "https://besa-booking.vercel.app/",
@@ -116,7 +117,7 @@ const Portfolio: React.FC = () => {
     {
       title: "ChariWork",
       description:
-        "A website that rounds up your changes from everyday purchases and donates it to charity. Built with React, Node.js, and Neon Database, featuring secure payment integration and real-time donation tracking.",
+        "A polished product website for a donation platform that helps users round up purchases and give to charity. Built with React and Node.js, with payment integration, user flows, and live donation tracking.",
       tech: ["React", "Node.js", "Neon", "Plaid API", "Charities API"],
       github: "https://github.com/PouriaRez/ChariWork",
       demo: "https://chari-work-115.vercel.app/",
@@ -126,7 +127,7 @@ const Portfolio: React.FC = () => {
     {
       title: "Portfolio for UCLA EE Engineer",
       description:
-        "Personal portfolio website for a UCLA electrical engineering student, showcasing projects and skills with a sleek, modern design. Built with HTML and CSS",
+        "A personal branding website for an engineering student who needed a stronger online presence to showcase work, experience, and technical depth with a clean modern design.",
       tech: ["HTML", "CSS", "JavaScript"],
       github: "https://github.com/agonzalez85/andys-Website",
       demo: "https://andygonzalez.me/",
@@ -136,7 +137,7 @@ const Portfolio: React.FC = () => {
     {
       title: "Meal Planner App",
       description:
-        "A meal planning application that generates weekly meal plans and shopping lists based on user dietary preferences and restrictions. Built with React and Javascript.",
+        "A user-focused web app that turns dietary preferences into weekly meal plans and shopping lists with a simple interface and clear interactions.",
       tech: ["React", "JavaScript", "Firebase"],
       github: "https://github.com/arelyyrosendes/meal-planner-app",
       demo: null,
@@ -152,10 +153,10 @@ const Portfolio: React.FC = () => {
     location: "Santa Cruz, CA",
     period: "June 2025 – Present",
     description: [
-      "Designed and developed a React-based tour booking platform used by prospective students to schedule engineering building tours",
-      "Built and maintained an admin dashboard for managing tours, student ambassadors, availability, and office hours",
-      "Implemented secure authentication with Firebase Auth and real-time data management using Firestore",
-      "Collaborated cross-functionally to deliver responsive, mobile-first UI components with consistent design patterns"
+      "Designed and shipped a production React website that supports real scheduling workflows for prospective students and internal staff",
+      "Built an admin dashboard to manage tours, ambassadors, office hours, and availability from one place",
+      "Implemented secure Firebase authentication and real-time Firestore data flows for a reliable day-to-day tool",
+      "Delivered responsive interfaces that stay clear and usable across phones, tablets, and desktops"
     ],
     technologies: ["React", "TypeScript", "Firebase", "Tailwind CSS", "React Router"]
   },
@@ -165,10 +166,10 @@ const Portfolio: React.FC = () => {
     location: "Livermore, CA",
     period: "Summer 2024",
     description: [
-      "Deployed a locally hosted AI web interface using Docker and Kubernetes, removing reliance on external services",
-      "Managed containerized applications and service orchestration in a Linux-based environment",
-      "Implemented CI/CD pipelines to automate builds and deployments for internal tools",
-      "Partnered with senior engineers to improve system reliability, documentation, and deployment workflows"
+      "Deployed and supported internal web tooling in a secure environment using Docker and Kubernetes",
+      "Managed containerized services and Linux-based infrastructure with a focus on reliability and repeatability",
+      "Implemented CI/CD workflows that reduced manual deployment work for internal tools",
+      "Worked with senior engineers to strengthen documentation, maintenance practices, and delivery workflows"
     ],
     technologies: ["Docker", "Kubernetes", "Linux", "OpenShift", "CI/CD"]
   },
@@ -178,10 +179,10 @@ const Portfolio: React.FC = () => {
     location: "Union City, CA",
     period: "2022 – 2023",
     description: [
-      "Led and trained a front-end team to improve checkout efficiency and customer experience",
-      "Oversaw daily front-end operations, ensuring transaction accuracy and operational consistency",
-      "Introduced workflow improvements that reduced checkout delays and improved team coordination",
-      "Mentored new hires through onboarding and ongoing training"
+      "Led a customer-facing team and learned how clear communication and smooth processes affect trust",
+      "Managed fast-moving daily operations while maintaining accuracy and consistency under pressure",
+      "Introduced workflow improvements that reduced delays and improved team coordination",
+      "Trained and supported new team members through onboarding and daily operations"
     ],
     technologies: ["POS Systems", "Team Leadership", "Customer Service"]
   },
@@ -211,13 +212,12 @@ const Portfolio: React.FC = () => {
   }
 ];
 
-
   const navItems = [
-    { label: 'About', ref: aboutRef, id: 'about' },
-    { label: 'Skills', ref: skillsRef, id: 'skills' },
-    { label: 'Experience', ref: experienceRef, id: 'experience' },
     { label: 'Projects', ref: projectsRef, id: 'projects' },
-    { label: 'Resume', ref: resumeRef, id: 'resume' }
+    { label: 'Services', ref: skillsRef, id: 'skills' },
+    { label: 'About', ref: aboutRef, id: 'about' },
+    { label: 'Experience', ref: experienceRef, id: 'experience' },
+    { label: 'Contact', ref: resumeRef, id: 'resume' }
   ];
 
   const renderProjectImage = (image: string | undefined, title: string): JSX.Element | null => {
@@ -354,37 +354,59 @@ const Portfolio: React.FC = () => {
           id="hero"
           className="section hero min-h-[calc(95vh-96px)] flex items-center px-6"
         >
-          <div className="container max-w-6xl mx-auto w-full">
+          <div className="container max-w-5xl mx-auto w-full">
             <div
               key={isMobile ? 'hero-mobile' : 'hero-desktop'}
               className={`hero-card-modern ${isLoaded ? 'hero-card-ready' : ''}`}
             >
               <div className="hero-copy">
-                <p className="hero-kicker">Computer Science • Web Development & Full-Stack</p>
+                <p className="hero-kicker">Websites for growing businesses and organizations</p>
                 <h1 ref={nameRef} className="hero-title typing">Arely Rosendes</h1>
-                <h2 className="hero-subtitle">From concept to deployment; I build websites!</h2>
+                <h2 className="hero-subtitle">Custom websites designed to grow your business.</h2>
                 <p className="hero-body">
-                  Computer Science graduate from{' '}
-                  <span style={{ color: 'var(--natural)', fontWeight: 600 }}>UC Santa Cruz</span>{' '}
-                  building full-stack websites and web applications with a strong focus on usability, performance, and real-world impact.
+                  I’m a web developer and Computer Science graduate from{' '}
+                  <span style={{ color: 'var(--natural)', fontWeight: 600 }}>UC Santa Cruz.</span>{' '}
+                  I build websites that are easy to use, look professional, and turn visitors into real clients.
                 </p>
                 <div className="hero-actions">
+                  <div className="hero-primary-cta">
+                    <div className="hero-cta-row">
+                      <button
+                        className="cta-btn cta-btn-primary"
+                        onClick={() => scrollToSection(resumeRef)}
+                      >
+                        Start Your Project
+                        <ArrowRight size={18} />
+                      </button>
+                      <button
+                        className="cta-btn cta-btn-secondary"
+                        onClick={() => scrollToSection(projectsRef)}
+                      >
+                        See My Work
+                      </button>
+                    </div>
+                    <div className="hero-proof-point">✔ Built platforms used by 1,000+ users</div>
+                  </div>
                   <div className="hero-socials">
-                  <a className="icon-btn" href="https://github.com/arelyyrosendes" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-                      <Github size={26} />
+                    <a
+                      className="icon-btn hero-social-link"
+                      href={projectInquiryLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Project inquiry form"
+                    >
+                      <ClipboardList size={26} />
+                      <span className="hero-social-tooltip">Inquiry Form</span>
                     </a>
-                    <a className="icon-btn linkedin" href="https://www.linkedin.com/in/arelyrosendes/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                  <a className="icon-btn hero-social-link" href="https://github.com/arelyyrosendes" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                      <Github size={26} />
+                      <span className="hero-social-tooltip">GitHub</span>
+                    </a>
+                    <a className="icon-btn linkedin hero-social-link" href="https://www.linkedin.com/in/arelyrosendes/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                       <Linkedin size={26} />
+                      <span className="hero-social-tooltip">LinkedIn</span>
                     </a>
                   </div>
-                  {/* <a
-                    className="btn resume-btn"
-                    href="/Resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Resume <ArrowRight size={18} />
-                  </a> */}
                 </div>
               </div>
 
@@ -398,27 +420,31 @@ const Portfolio: React.FC = () => {
                 </div>
                 <div className="hero-location hero-location-below">
                   <MapPin size={20} />
-                  <span>UC Santa Cruz</span>
+                  <span>Bay Area, California</span>
+                </div>
+                <div className="hero-availability-badge">
+                  Available for new projects
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <AboutMe ref={aboutRef} />
+        <Projects
+          ref={projectsRef}
+          projects={projects}
+          renderProjectImage={renderProjectImage}
+        />
+
         <TechnicalSkills ref={skillsRef} />
+        <AboutMe ref={aboutRef} />
+        
 
         <Experience
           ref={experienceRef}
           experiences={experiences}
           selectedIndex={selectedIndex}
           onSelect={setSelectedIndex}
-        />
-
-        <Projects
-          ref={projectsRef}
-          projects={projects}
-          renderProjectImage={renderProjectImage}
         />
 
         <Resume ref={resumeRef} />
@@ -432,7 +458,7 @@ const Portfolio: React.FC = () => {
               {[
                 { icon: <Github size={20} />, href: "https://github.com/arelyyrosendes", external: true },
                 { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arelyrosendes/", external: true },
-                { icon: <Mail size={20} />, href: "mailto:arelyrosendes@gmail.com?subject=Hello%20Arely" }
+                { icon: <Mail size={20} />, href: projectInquiryLink }
               ].map((social, index) => (
                 <a
                   key={index}

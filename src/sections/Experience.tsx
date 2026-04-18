@@ -22,10 +22,10 @@ const Experience = forwardRef<HTMLElement, ExperienceProps>(
       id="experience"
       className="section py-20 px-6"
     >
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-5xl mx-auto">
         <div className="flex items-center mb-10">
           <h2 className="section-heading font-bold font-mono mr-4" style={{ color: 'var(--primary)' }}>
-            03. Experience
+            04. Experience
           </h2>
           <div className="flex-1 h-px bg-gray-600"></div>
         </div>
